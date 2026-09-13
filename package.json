@@ -1,0 +1,16 @@
+{
+  "name": "alexakirk-com",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Alexa Kirk's static portfolio and Netlify contact function",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check contact-form.js && node --check netlify/functions/contact.js && node --check netlify/functions/lib/contact-handler.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "nodemailer": "^7.0.6"
+  }
+}

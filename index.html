@@ -428,6 +428,39 @@
             min-height: 150px;
             resize: vertical;
         }
+
+        .honeypot {
+            position: absolute;
+            left: -10000px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        .form-status {
+            min-height: 1.6em;
+            margin-top: 18px;
+            font-weight: 500;
+        }
+
+        .form-status.success {
+            color: #28643c;
+        }
+
+        .form-status.error {
+            color: #a12828;
+        }
+
+        .contact-form .btn {
+            width: 100%;
+            margin-right: 0;
+        }
+
+        .btn:disabled {
+            cursor: wait;
+            opacity: 0.65;
+            transform: none;
+        }
         
         footer {
             background-color: var(--dark);
@@ -532,6 +565,10 @@
             
             .subtitle {
                 font-size: 1.2rem;
+            }
+
+            .contact-form {
+                padding: 28px 20px;
             }
         }
     </style>
@@ -720,21 +757,22 @@
                 <form id="contactForm">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name" autocomplete="name" maxlength="100" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" autocomplete="email" maxlength="254" required>
                     </div>
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" required>
+                    <div class="honeypot" aria-hidden="true">
+                        <label for="website">Website (leave blank)</label>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea id="message" name="message" required></textarea>
+                        <textarea id="message" name="message" maxlength="5000" required></textarea>
                     </div>
                     <button type="submit" class="btn">Send Message</button>
+                    <p id="contactStatus" class="form-status" role="status" aria-live="polite"></p>
                 </form>
             </div>
         </div>
@@ -799,19 +837,7 @@
             });
         });
         
-        // Contact form submission
-        const contactForm = document.getElementById('contactForm');
-        
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // In a real website, you would handle the form submission here
-            // For demonstration purposes, we'll just show an alert
-            alert('Thank you for your message! This is a demo website, so no message was actually sent.');
-            
-            // Reset the form
-            contactForm.reset();
-        });
     </script>
+    <script src="contact-form.js"></script>
 </body>
 </html>
